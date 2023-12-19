@@ -25,6 +25,7 @@
   "bugs": {
     "url": "https://github.com/enjoycoding/vite-plugin-mock-server/issues"
   },
+  "type": "module",
   "homepage": "https://github.com/enjoycoding/vite-plugin-mock-server#readme",
   "devDependencies": {
     "@types/node": "^15.12.4",
