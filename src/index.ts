@@ -62,7 +62,6 @@ export default (mocks: MockHandler[]): Plugin => {
           r.method = r.method?.toUpperCase() || 'GET'
 
           if (r.method.includes(',')) {
-
             return r.method
               .split(/, ?/g)
               .flatMap(str => {
