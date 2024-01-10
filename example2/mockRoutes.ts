@@ -1,6 +1,6 @@
-import { MockHandler } from '../../dist/index'
+import { MockHandler } from '../src'
 
-const mocks: MockHandler[] = [
+export default [
   {
     pattern: '/api/test1/1',
     handle: (req, res) => {
@@ -8,6 +8,20 @@ const mocks: MockHandler[] = [
     }
   },
   {
+    pattern: '/config.json',
+    response: { env: 'dev', databaseUrl: '//:firebaseio.com.'}
+  },
+  {
+    // * matches zero or more characters
+    pattern: '/api/test1/*',
+    // use some comma-delimetered values to generate mocks for each of these
+    method: 'POST, GET, DELETE, PUT, Patch', 
+    handle: (req, res) => {
+      res.end('Hello world star ' + req.url)
+    }
+  },
+  {
+    // send parameter {userId} and handle it in 'req.params.userId'
     pattern: '/api/test1/users/{userId}',
     handle: (req, res) => {
       const data = {
@@ -26,7 +40,7 @@ const mocks: MockHandler[] = [
     handle: (req, res) => {
       res.setHeader('Content-Type', 'application/json')
 
-      //req is incomingMessage which extends stream.Readable 
+      // req is incomingMessage which extends stream.Readable 
       // --> https://nodejs.org/api/stream.html#readablereadsize
       // res.end need to be within the function
       // there is a size limit for the bodyString to get parsed 
@@ -36,6 +50,4 @@ const mocks: MockHandler[] = [
       })          
     }
   },
-]
-
-export default mocks
+] as MockHandler[]

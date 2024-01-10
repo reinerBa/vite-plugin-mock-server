@@ -3,10 +3,12 @@ import { ref } from 'vue'
 const text1 = ref('')
 const text2 = ref('')
 const text3 = ref('')
+const text4 = ref('')
 const firstName = ref('Tyler')
 const lastName = ref('Durden')
 
 fetch('/api/test1/1').then(r => r.text().then(t => text1.value = t))
+fetch('/config.json').then(r => r.json().then(t => text4.value = t))
 
 const t2 = ref('myValue')
 function sendRequest2 () {
@@ -23,28 +25,28 @@ sendRequest3()
 
 <template>
   <div id="example-app">
-    <h3>Example 2 for vite-plugin-mock-server</h3>
+    <h3>Example 2 for vite-plugin-mock-simple</h3>
     <div>
-      <h6>Mock example 1</h6>
-      <p>Response</p>
+      <h6>Mock example 1 🤞</h6>
+      <p>Response for <pre>[GET]/api/test1/1</pre></p>
       <div class="response">
         {{ text1 }}
       </div>
     </div>
     
     <div>
-      <h6>Mock example  2</h6>
+      <h6>Mock example 2 🤞</h6>
       <p>Request</p>
       <p class="request">
-        <input type="text" v-model="t2"/>
+        <input type="text" v-model="t2" @keyup="sendRequest2()" minlength="1"/>
         <button @click="sendRequest2">Send</button>
       </p>
-      <p>Response</p>
+      <p>Response for <pre>[GET]/api/test1/users/{{t2}}</pre></p>
       <div class="response">{{ JSON.stringify( text2 , null, "\t") }}</div>
     </div>
 
     <div>
-      <h6>Mock example  3</h6>
+      <h6>Mock example  3 🤞</h6>
       <p>Request</p>
       <p class="request">
         <label>
@@ -55,10 +57,16 @@ sendRequest3()
           Last name:
           <input type="text" v-model="lastName"/>
         </label>
-        <button @click="sendRequest3">Send</button>
+        <button @click="sendRequest3" class="send-button">Send</button>
       </p>
-      <p>Response</p>
+      <p>Response for <pre>[POST]/api/test1/body/json</pre></p>
       <div class="response">{{ JSON.stringify( text3 , null, "\t") }}</div>
+    </div>
+
+    <div>
+      <h6>Mock example 4 🤞</h6>
+      <p>Response for <pre>[GET]/config.json</pre></p>
+      <div class="response">{{ JSON.stringify( text4 , null, "\t") }}</div>
     </div>
 
   </div>
@@ -85,6 +93,7 @@ label {
 #example-app {
   max-width: 900px;
   padding: 1rem;
+  margin: 0 auto;
 }
 h6 {
   margin-top: 1rem;
@@ -93,5 +102,13 @@ h6 {
   --line-height: 1.1;
   --font-size: 18px;
   --typography-spacing-vertical: 1rem;
+}
+.send-button {
+  height: 2.75rem;
+  width: 7rem;
+  margin-top: 1.75em;
+}
+input, button{
+  margin-bottom: 0 !important;
 }
 </style>

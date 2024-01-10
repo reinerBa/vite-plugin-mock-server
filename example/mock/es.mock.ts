@@ -28,7 +28,7 @@ const mocks: MockHandler[] = [
   },
   {
     pattern: '/api/test1/body/json',
-    method: 'POST',
+    method: 'POST,DELETE, PUT, PATCH',
     handle: (req, res) => {
       res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify(req.body))
