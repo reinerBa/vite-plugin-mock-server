@@ -1,5 +1,7 @@
 import { MockHandler } from '../src'
 
+let counter = 0
+
 export default [
   {
     pattern: '/api/test1/1',
@@ -8,8 +10,13 @@ export default [
     }
   },
   {
+    pattern: '/api/delayed',
+    jsonBody: ['1 sec delayed'],
+    delay: 1000
+  },
+  {
     pattern: '/config.json',
-    response: { env: 'dev', databaseUrl: '//:firebaseio.com.'}
+    jsonBody: { env: 'dev', databaseUrl: '//:firebaseio.com.'}
   },
   {
     // * matches zero or more characters
@@ -28,7 +35,9 @@ export default [
         url: req.url,
         params: req.params,
         query: req.query,
-        body: req.body
+        body: req.body,
+        // to use persistent data
+        iteration: counter++
       }
       res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify(data))

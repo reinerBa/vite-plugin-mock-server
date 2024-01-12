@@ -94,7 +94,7 @@ export default [
     pattern: '/config.json',
     // Define a json-response directly, with the response-property 👌
     // in that case you cannot define the handle-property
-    response: { databaseUrl: '//:firebaseio.com.', api: 'fake'}
+    jsonBody: { databaseUrl: '//:firebaseio.com.', api: 'fake'}
   },
   {
     pattern: '/api/upload/1',
@@ -105,6 +105,14 @@ export default [
       res.statusCode = 203 
       res.end('Hello world!' + req.url)
     }
+  },
+  {
+    // optional: to give the app a more real experience
+    // delay the time it takes to get the response in millisecounds.
+    // 1000 => 1 secound
+    delay: 1000
+    pattern: '/api/delayed',
+    jsonBody: ['1 sec delayed'],
   },
   {
     // * matches zero or more characters
@@ -172,9 +180,11 @@ npm run dev
 
 ```ts
 export type MockHandler = {
-  pattern: string,
-  method?: string,
+  delay?: number,           // optional: time to delay the response in millisecounds
+  pattern: string,          // pattern to match urls
+  method?: string,          // default method is GET
   handle: (Request: Request, Response: http.ServerResponse) => void || response: Object
+  jsonBody?: Object         // XOR to handle, only one of this properties can be defined per handler. A JS-Object that will be returned in json as response body
 }
 ```
 

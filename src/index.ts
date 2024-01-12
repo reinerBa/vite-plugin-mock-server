@@ -23,12 +23,14 @@ interface MockHandlerAll {
   pattern: string
   method?: string
   handle?: MockFunction 
-  response?: Object
+  jsonBody?: Object
+  delay?: number
 }
 interface MockHandlerInternal {
   pattern: string
   method: string
-  handle: MockFunction 
+  handle: MockFunction
+  delay?: number
 }
 
 type RequireOnlyOne<T, Keys extends keyof T = keyof T> =
@@ -39,7 +41,7 @@ type RequireOnlyOne<T, Keys extends keyof T = keyof T> =
             & Partial<Record<Exclude<Keys, K>, undefined>>
     }[Keys]
    
-export type MockHandler = RequireOnlyOne<MockHandlerAll, 'response' | 'handle'>
+export type MockHandler = RequireOnlyOne<MockHandlerAll, 'jsonBody' | 'handle'>
 
 interface LogEntry {
   timestamp: string
@@ -50,12 +52,16 @@ interface LogEntry {
 export default (mocks: MockHandler[]): Plugin => {
   return {
     name: PLUGIN_NAME,
+    apply: 'serve',
     configureServer: async (server: ViteDevServer) => {
       // build url matcher
       const matcher = new AntPathMatcher()
-      if ((mocks == null) || mocks.length === 0) {
-        console.error('No routes to mock found for vite-plugin-mock-simple')
-      }
+      if ((mocks == null) || !Array.isArray(mocks) || mocks.length === 0)
+        throw new Error('No routes to mock found for vite-plugin-mock-simple')
+      
+      if(mocks.some(e => !e.pattern?.length)) 
+        console.error('All routes need to define patterns. Some of the inserted objects don`t match the type MockHandler: ' 
+        + JSON.stringify(mocks.filter(e => !e.pattern),  null, "\t"))
 
       const foundMocks: MockHandlerInternal[] = mocks
         .flatMap((r: MockHandler) => {
@@ -69,6 +75,7 @@ export default (mocks: MockHandler[]): Plugin => {
                 return methodIsValid({
                   handle: r.handle,
                   pattern: r.pattern,
+                  delay: r.delay,
                   method: str
                 })
               })
@@ -77,14 +84,15 @@ export default (mocks: MockHandler[]): Plugin => {
         }
       )
       .map((r: MockHandlerAll) => {
-        if(typeof r.response !== 'object') 
+        if(typeof r.jsonBody !== 'object') 
           return  r as MockHandlerInternal
         return {
           pattern: r.pattern,
           method: r.method,
+          delay: r.delay,
           handle: (_, res) => {
             res.setHeader('Content-Type', 'application/json')
-            res.end(JSON.stringify(r.response))
+            res.end(JSON.stringify(r.jsonBody))
           }
         } as MockHandlerInternal})
 
@@ -135,7 +143,10 @@ async function doHandle (
         requestUrl: req.url ?? '',
         matchedMock: `[${match.method}]${match.pattern}`
       })
-    match.handle(req, res)
+    if(match.delay)
+      setTimeout(() => match.handle(req, res), match.delay ?? 1)
+    else
+      match.handle(req, res)
   } else {
     next()
   }
