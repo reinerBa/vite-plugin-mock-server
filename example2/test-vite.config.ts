@@ -21,7 +21,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           apply: 'serve',
           async configureServer(server: ViteDevServer) {
             setTimeout(async ()=> {
-              const errors: string[] = await runTests(`http://localhost:${port}`)
+              const errors: string[] = await runTests(`http://localhost:${port}`, fetch)
               server.close()
 
               errors.forEach(console.error)
