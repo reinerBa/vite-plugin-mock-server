@@ -1,6 +1,18 @@
 # vite-plugin-mock-simple
 
 [![npm][npm-img]][npm-url]
+[![NPM License](https://img.shields.io/npm/l/all-contributors.svg?style=flat)](https://github.com/reinerBa/vite-plugin-mock-simple/blob/primary/LICENSE)
+[![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)  
+[![GitHub last commit](https://img.shields.io/github/last-commit/reinerBa/vite-plugin-mock-simple.svg?style=flat)]()
+[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
+
+<p align="center">
+  <img alt="node-current" src="https://img.shields.io/node/v/vite-plugin-mock-simple?style=flat-square">
+  <img alt="npm peer dependency version" src="https://img.shields.io/npm/dependency-version/vite-plugin-mock-simple/peer/vite?style=flat-square">
+  <img alt="npm" src="https://img.shields.io/npm/dt/vite-plugin-mock-simple?style=flat-square">
+  <br>
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/reinerBa/vite-plugin-mock-simple/lint.yml?style=flat-square">
+</p>
 
 Provide local mocks for **Vite** to consume them in your app when running development-server.
 This is a heavy modified fork of [vite-plugin-mock-server](https://github.com/enjoycoding/vite-plugin-mock-server) by [octoape](https://github.com/octoape) licensed under the MIT-License. Forked to provide a simple vite-mock library.

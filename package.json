@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-mock-simple",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vite mock simple plugin",
   "main": "dist/index.js",
   "scripts": {
@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/reinerBa/vite-plugin-mock-simple/issues"
   },
-  "homepage": "https://github.com/enjoycoding/vite-plugin-mock-simple#readme",
+  "homepage": "https://github.com/reinerBa/vite-plugin-mock-simple#readme",
   "devDependencies": {
     "@types/node": "^15.12.4",
     "del-cli": "^5.1.0",
