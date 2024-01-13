@@ -26,7 +26,7 @@ export default defineConfig({
 
           const userId = responseJson.params.userId
           
-          server.close()
+          await server.close()
           if(responseText !== 'Hello world!/api/test1/1' || userId !== "octoape") 
             throw new Error('wrong mock response')
           else 
