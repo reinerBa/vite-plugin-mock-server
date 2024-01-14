@@ -2,6 +2,9 @@
 
 [![npm][npm-img]][npm-url]
 [![NPM License](https://img.shields.io/npm/l/all-contributors.svg?style=flat)](https://github.com/reinerBa/vite-plugin-mock-simple/blob/primary/LICENSE)
+<a href="https://github.com/reinerBa/vite-plugin-mock-simple/actions">
+  <img src="https://github.com/reinerBa/vite-plugin-mock-simple/actions/workflows/compileAndRuntime.yml/badge.svg" alt="test workflow">
+</a>
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)  
 [![GitHub last commit](https://img.shields.io/github/last-commit/reinerBa/vite-plugin-mock-simple.svg?style=flat)]()
 [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
