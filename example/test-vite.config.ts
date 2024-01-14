@@ -7,16 +7,14 @@ import routes1 from './mock/es.mock'
 import routes2 from './mock/cjs.mock'
 import routes3 from './mock/apis/es2.mock'
 import routes4 from './mock/apis/cjs2.mock'
+const stopdev = require('vite-plugin-stopdev').default
 
 const port = 8000
 let errors: string[]
-let responseText, responseJson, userId
 export default async ({ command, mode }: ConfigEnv): Promise<UserConfigExport> => {
   
   const runTestsI =await import('../example2/testMockRoutes')
   const runTests = runTestsI.default
-  const stopdevI =await import('vite-plugin-stopdev')
-  const stopdev = stopdevI.default
   return {
   server: { port },
   plugins: [
