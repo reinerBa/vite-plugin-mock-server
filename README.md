@@ -17,6 +17,7 @@ This is a heavy modified fork of [vite-plugin-mock-server](https://github.com/en
 A mock server plugin for **Vite**, developed based on TypeScript. 
 And support using TypeScript and JavaScript to write Mock API. When the Mock API file 
 is modified, it will be hot updated automatically. 
+**Zero Dependency**
 
 ## Install
 

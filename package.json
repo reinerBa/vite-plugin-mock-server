@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-mock-simple",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vite mock simple plugin",
   "main": "dist/index.js",
   "scripts": {
@@ -35,13 +35,14 @@
   },
   "homepage": "https://github.com/reinerBa/vite-plugin-mock-simple#readme",
   "devDependencies": {
-    "@types/node": "^15.12.4",
     "del-cli": "^5.1.0",
-    "typescript": "^5.3.3",
-    "vite": "^2.3.8"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "@howiefh/ant-path-matcher": "0.0.4"
+  },
+  "peerDependencies": {
+    "vite": ">=2.x"
   },
   "files": [
     "./dist",
