@@ -26,7 +26,7 @@
       "name": "Octoape",
       "email": "octoape@qq.com",
       "url": "https://github.com/octoape"
-    } 
+    }
   ],
   "type": "module",
   "license": "MIT",
@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/reinerBa/vite-plugin-mock-simple#readme",
   "devDependencies": {
+    "@types/node": "^20.11.5",
     "del-cli": "^5.1.0",
     "typescript": "^5.3.3"
   },
